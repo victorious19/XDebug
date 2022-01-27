@@ -32,12 +32,12 @@ class AuthController extends Controller
             'user' => $user,
             'token' => $token
         ];
-        return response($response, 201);
+        return response($response, 200);
     }
     function login(Request $request)
     {
         $request->validate([
-            'login' => 'required|string|max:30',
+            'login' => 'required|string',
             'password'=>'required|string|min:8'
         ]);
         $auth = $request->only(['login', 'password']);
@@ -55,13 +55,7 @@ class AuthController extends Controller
             'user' => $user,
             'token' => $token
         ];
-        return response($response, 201);
-    }
-    static function logout() {
-        auth()->user()->tokens()->delete();
-        return [
-            'message' => 'Logged out'
-        ];
+        return response($response, 200);
     }
     function passwordReset(Request $request) {
         $request->validate(['email'=>'required|string']);
